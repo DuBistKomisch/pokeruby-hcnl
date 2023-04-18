@@ -22,6 +22,7 @@ SootopolisCity_Mart_Items:: @ 815B234
 	.2byte ITEM_X_ATTACK
 	.2byte ITEM_X_DEFEND
 	.2byte ITEM_SHADOW_MAIL
+	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_NONE
 	release
 	end

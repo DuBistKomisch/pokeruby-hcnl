@@ -36,6 +36,7 @@ LilycoveCity_DepartmentStore_2F_Items1:: @ 8159F44
 	.2byte ITEM_ICE_HEAL
 	.2byte ITEM_AWAKENING
 	.2byte ITEM_FLUFFY_TAIL
+	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_NONE
 	release
 	end
@@ -62,6 +63,7 @@ LilycoveCity_DepartmentStore_2F_Items2:: @ 8159F78
 	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_WAVE_MAIL
 	.2byte ITEM_MECH_MAIL
+	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_NONE
 	release
 	end

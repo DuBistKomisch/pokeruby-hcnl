@@ -18,6 +18,7 @@ OldaleTown_Mart_Items1:: @ 8152F9C
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
+	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_NONE
 	release
 	end
@@ -35,6 +36,7 @@ OldaleTown_Mart_Items2:: @ 8152FB8
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
+	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_NONE
 	release
 	end

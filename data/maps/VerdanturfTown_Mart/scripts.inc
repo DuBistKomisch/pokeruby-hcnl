@@ -24,6 +24,7 @@ VerdanturfTown_Mart_Items:: @ 8153ED4
 	.2byte ITEM_REPEL
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_FLUFFY_TAIL
+	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_NONE
 	release
 	end

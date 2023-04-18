@@ -28,6 +28,7 @@ RustboroCity_Mart_Items1:: @ 8157C00
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_ATTACK
 	.2byte ITEM_X_DEFEND
+	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_NONE
 	release
 	end
@@ -52,6 +53,7 @@ RustboroCity_Mart_Items2:: @ 8157C28
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_ATTACK
 	.2byte ITEM_X_DEFEND
+	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_NONE
 	release
 	end
