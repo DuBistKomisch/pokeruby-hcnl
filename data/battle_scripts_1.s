@@ -2972,7 +2972,9 @@ BattleScript_FaintedMonTryChooseAnother: @ 81D8CC2
 	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonChooseAnother
 	jumpifword COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonChooseAnother
-	jumpifbyte EQUAL, sBATTLE_STYLE, 1, BattleScript_FaintedMonChooseAnother
+	// force set mode
+	//jumpifbyte EQUAL, sBATTLE_STYLE, 1, BattleScript_FaintedMonChooseAnother
+	goto BattleScript_FaintedMonChooseAnother
 	jumpifcantswitch USER, BattleScript_FaintedMonChooseAnother
 	printstring BATTLE_TEXT_WillSwitch
 	setbyte gBattleCommunication, 0

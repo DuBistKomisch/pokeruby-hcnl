@@ -16,7 +16,6 @@ enum
 {
     MENUITEM_TEXTSPEED,
     MENUITEM_BATTLESCENE,
-    MENUITEM_BATTLESTYLE,
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
@@ -27,10 +26,9 @@ enum
 #define tMenuSelection  data[0]
 #define tOptTextSpeed   data[1]
 #define tOptBattleScene data[2]
-#define tOptBattleStyle data[3]
-#define tOptSound       data[4]
-#define tOptButtonMode  data[5]
-#define tOptFrameType   data[6]
+#define tOptSound       data[3]
+#define tOptButtonMode  data[4]
+#define tOptFrameType   data[5]
 
 const u16 gUnknown_0839F5FC[] = INCBIN_U16("graphics/misc/option_menu_text.gbapal");
 // note: this is only used in the Japanese release
@@ -45,8 +43,6 @@ static u8   TextSpeed_ProcessInput(u8 selection);
 static void TextSpeed_DrawChoices(u8 selection);
 static u8   BattleScene_ProcessInput(u8 selection);
 static void BattleScene_DrawChoices(u8 selection);
-static u8   BattleStyle_ProcessInput(u8 selection);
-static void BattleStyle_DrawChoices(u8 selection);
 static u8   Sound_ProcessInput(u8 selection);
 static void Sound_DrawChoices(u8 selection);
 static u8   FrameType_ProcessInput(u8 selection);
@@ -151,7 +147,6 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tMenuSelection = 0;
         gTasks[taskId].tOptTextSpeed   = gSaveBlock2.optionsTextSpeed;
         gTasks[taskId].tOptBattleScene = gSaveBlock2.optionsBattleSceneOff;
-        gTasks[taskId].tOptBattleStyle = gSaveBlock2.optionsBattleStyle;
         gTasks[taskId].tOptSound       = gSaveBlock2.optionsSound;
         gTasks[taskId].tOptButtonMode  = gSaveBlock2.optionsButtonMode;
         gTasks[taskId].tOptFrameType   = gSaveBlock2.optionsWindowFrameType;
@@ -163,15 +158,13 @@ void CB2_InitOptionMenu(void)
 
         Menu_PrintText(gSystemText_TextSpeed,   4,  5);
         Menu_PrintText(gSystemText_BattleScene, 4,  7);
-        Menu_PrintText(gSystemText_BattleStyle, 4,  9);
-        Menu_PrintText(gSystemText_Sound,       4, 11);
-        Menu_PrintText(gSystemText_ButtonMode,  4, 13);
-        Menu_PrintText(gSystemText_Frame,       4, 15);
-        Menu_PrintText(gSystemText_Cancel,      4, 17);
+        Menu_PrintText(gSystemText_Sound,       4,  9);
+        Menu_PrintText(gSystemText_ButtonMode,  4, 11);
+        Menu_PrintText(gSystemText_Frame,       4, 13);
+        Menu_PrintText(gSystemText_Cancel,      4, 15);
 
         TextSpeed_DrawChoices(gTasks[taskId].tOptTextSpeed);
         BattleScene_DrawChoices(gTasks[taskId].tOptBattleScene);
-        BattleStyle_DrawChoices(gTasks[taskId].tOptBattleStyle);
         Sound_DrawChoices(gTasks[taskId].tOptSound);
         ButtonMode_DrawChoices(gTasks[taskId].tOptButtonMode);
         FrameType_DrawChoices(gTasks[taskId].tOptFrameType);
@@ -211,12 +204,12 @@ static void Task_OptionMenuProcessInput(u8 taskId)
         if (gTasks[taskId].tMenuSelection > 0)
             gTasks[taskId].tMenuSelection--;
         else
-            gTasks[taskId].tMenuSelection = 6;
+            gTasks[taskId].tMenuSelection = 5;
         HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        if (gTasks[taskId].tMenuSelection < 6)
+        if (gTasks[taskId].tMenuSelection < 5)
             gTasks[taskId].tMenuSelection++;
         else
             gTasks[taskId].tMenuSelection = 0;
@@ -233,10 +226,6 @@ static void Task_OptionMenuProcessInput(u8 taskId)
         case MENUITEM_BATTLESCENE:
             gTasks[taskId].tOptBattleScene = BattleScene_ProcessInput(gTasks[taskId].tOptBattleScene);
             BattleScene_DrawChoices(gTasks[taskId].tOptBattleScene);
-            break;
-        case MENUITEM_BATTLESTYLE:
-            gTasks[taskId].tOptBattleStyle = BattleStyle_ProcessInput(gTasks[taskId].tOptBattleStyle);
-            BattleStyle_DrawChoices(gTasks[taskId].tOptBattleStyle);
             break;
         case MENUITEM_SOUND:
             gTasks[taskId].tOptSound = Sound_ProcessInput(gTasks[taskId].tOptSound);
@@ -258,7 +247,6 @@ static void Task_OptionMenuSave(u8 taskId)
 {
     gSaveBlock2.optionsTextSpeed       = gTasks[taskId].tOptTextSpeed;
     gSaveBlock2.optionsBattleSceneOff  = gTasks[taskId].tOptBattleScene;
-    gSaveBlock2.optionsBattleStyle     = gTasks[taskId].tOptBattleStyle;
     gSaveBlock2.optionsSound           = gTasks[taskId].tOptSound;
     gSaveBlock2.optionsButtonMode      = gTasks[taskId].tOptButtonMode;
     gSaveBlock2.optionsWindowFrameType = gTasks[taskId].tOptFrameType;
@@ -361,33 +349,6 @@ static void BattleScene_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gSystemText_Off, 190, 56, styles[1]);
 }
 
-static u8 BattleStyle_ProcessInput(u8 selection)
-{
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
-        selection ^= 1;
-    return selection;
-}
-
-#if ENGLISH
-#define BATTLESTYLE_SHIFT (120)
-#define BATTLESTYLE_SET (190)
-#elif GERMAN
-#define BATTLESTYLE_SHIFT (120)
-#define BATTLESTYLE_SET (178)
-#endif
-
-static void BattleStyle_DrawChoices(u8 selection)
-{
-    u8 styles[2];
-
-    styles[0] = 0xF;
-    styles[1] = 0xF;
-    styles[selection] = 0x8;
-
-    DrawOptionMenuChoice(gSystemText_Shift, BATTLESTYLE_SHIFT, 72, styles[0]);
-    DrawOptionMenuChoice(gSystemText_Set,   BATTLESTYLE_SET,   72, styles[1]);
-}
-
 static u8 Sound_ProcessInput(u8 selection)
 {
     if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
@@ -406,8 +367,8 @@ static void Sound_DrawChoices(u8 selection)
     styles[1] = 0xF;
     styles[selection] = 0x8;
 
-    DrawOptionMenuChoice(gSystemText_Mono,   120, 88, styles[0]);
-    DrawOptionMenuChoice(gSystemText_Stereo, 172, 88, styles[1]);
+    DrawOptionMenuChoice(gSystemText_Mono,   120, 72, styles[0]);
+    DrawOptionMenuChoice(gSystemText_Stereo, 172, 72, styles[1]);
 }
 
 static u8 FrameType_ProcessInput(u8 selection)
@@ -458,8 +419,8 @@ static void FrameType_DrawChoices(u8 selection)
     }
 
     text[i] = EOS;
-    Menu_PrintText(gSystemText_Type, 15, 15);
-    Menu_PrintText(text, 18, 15);
+    Menu_PrintText(gSystemText_Type, 15, 13);
+    Menu_PrintText(text, 18, 13);
 #elif GERMAN
     u8 text[16];
     u8 n = selection + 1;
@@ -479,7 +440,7 @@ static void FrameType_DrawChoices(u8 selection)
         *str++ = CHAR_SPACE;
     }
     *str = EOS;
-    Menu_PrintText(text, 15, 15);
+    Menu_PrintText(text, 15, 13);
 #endif
 }
 
@@ -511,7 +472,7 @@ static void ButtonMode_DrawChoices(u8 selection)
     styles[2] = 0xF;
     styles[selection] = 0x8;
 
-    DrawOptionMenuChoice(gSystemText_Normal, 120, 104, styles[0]);
-    DrawOptionMenuChoice(gSystemText_LR,     166, 104, styles[1]);
-    DrawOptionMenuChoice(gSystemText_LA,     188, 104, styles[2]);
+    DrawOptionMenuChoice(gSystemText_Normal, 120, 88, styles[0]);
+    DrawOptionMenuChoice(gSystemText_LR,     166, 88, styles[1]);
+    DrawOptionMenuChoice(gSystemText_LA,     188, 88, styles[2]);
 }
