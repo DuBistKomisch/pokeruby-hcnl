@@ -68,8 +68,9 @@ BattleScript_PrintCaughtMonInfo: @ 81D9ED0
 	displaydexinfo
 
 BattleScript_TryNicknameCaughtMon: @ 81D9EE3
-	printstring BATTLE_TEXT_GiveNickname
-	waitstate
+	// skip straight to nicknaming
+	//printstring BATTLE_TEXT_GiveNickname
+	//waitstate
 	setbyte gBattleCommunication, 0
 	trygivecaughtmonnick BattleScript_GiveCaughtMonEnd
 	printstring BATTLE_TEXT_SentToPC

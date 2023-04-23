@@ -84,9 +84,11 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	waitmessage
 	givemon SPECIES_BELDUM, 5, ITEM_NONE
 	bufferspeciesname 1, SPECIES_BELDUM
-	msgbox MossdeepCity_StevensHouse_Text_1A1102, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	call_if_eq Common_EventScript_NameReceivedPartyMon
+	// skip straight to nicknaming
+	//msgbox MossdeepCity_StevensHouse_Text_1A1102, MSGBOX_YESNO
+	//compare VAR_RESULT, YES
+	//call_if_eq Common_EventScript_NameReceivedPartyMon
+	call Common_EventScript_NameReceivedPartyMon
 	setflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
 	setflag FLAG_RECEIVED_BELDUM
 	releaseall

@@ -29,11 +29,13 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	waitmessage
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
+	// skip straight to nicknaming
+	//msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, MSGBOX_YESNO
+	//compare VAR_RESULT, YES
+	//goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
+	//compare VAR_RESULT, NO
+	//goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA

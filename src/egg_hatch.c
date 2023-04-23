@@ -530,7 +530,9 @@ static void CB2_EggHatch_1(void)
         break;
     case 6:
         if (IsFanfareTaskInactive())
-            gEggHatchData->CB2_state++;
+            // skip straight to nicknaming
+            //gEggHatchData->CB2_state++;
+            gEggHatchData->CB2_state = 9;
         break;
     case 7:
         GetMonNick(&gPlayerParty[gEggHatchData->eggPartyID], gStringVar1);
@@ -548,11 +550,13 @@ static void CB2_EggHatch_1(void)
         break;
     case 9:
         {
+            /*
             s8 menuInput;
             if ((menuInput = Menu_ProcessInputNoWrap_()) != -2)
             {
                 if (menuInput != -1 && menuInput != 1)
                 {
+            */
                     u16 species;
                     u8 gender;
                     u32 personality;
@@ -562,10 +566,12 @@ static void CB2_EggHatch_1(void)
                     gender = GetMonGender(&gPlayerParty[gEggHatchData->eggPartyID]);
                     personality = GetMonData(&gPlayerParty[gEggHatchData->eggPartyID], MON_DATA_PERSONALITY, 0);
                     DoNamingScreen(3, gStringVar3, species, gender, personality, EggHatchSetMonNickname);
+            /*
                 }
                 else
                     gEggHatchData->CB2_state++;
             }
+            */
         }
         break;
     case 10:

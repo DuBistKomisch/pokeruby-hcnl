@@ -9627,10 +9627,15 @@ static void atkF3_trygivecaughtmonnick(void)
     switch (gBattleCommunication[0])
     {
     case 0:
+        // skip straight to nicknaming
+        gBattleCommunication[0] = 2;
+        BeginFastPaletteFade(3);
+        /*
         sub_8023A80();
         gBattleCommunication[0]++;
         gBattleCommunication[1] = 0;
         sub_802BC6C();
+        */
         break;
     case 1:
         if (gMain.newKeys & DPAD_UP && gBattleCommunication[1] != 0)
