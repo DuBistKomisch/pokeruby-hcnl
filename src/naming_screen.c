@@ -98,6 +98,7 @@ static void GetCursorPos(s16 *, s16 *);
 static void SetCursorPos(s16, s16);
 static void sub_80B77F8(void);
 static void sub_80B74B0(void);
+static bool8 InputTextIsEmpty(void);
 static void DisplaySentToPCMessage(void);
 static u8 GetKeyRoleAtCursorPos(void);
 static u8 sub_80B61C8(void);
@@ -465,6 +466,11 @@ static bool8 MainState_WaitPageSwap(struct Task *task)
 
 static bool8 MainState_6(struct Task *task)
 {
+    if (InputTextIsEmpty()) {
+      SetInputState(INPUT_STATE_ENABLED);
+      namingScreenDataPtr->state = MAIN_STATE_HANDLE_INPUT;
+      return FALSE;
+    }
     sub_80B74B0();
     SetInputState(INPUT_STATE_DISABLED);
     sub_80B68D8(0);
@@ -1586,6 +1592,20 @@ static void sub_80B74B0(void)
             break;
         }
     }
+}
+
+static bool8 InputTextIsEmpty(void)
+{
+    u8 i;
+
+    for (i = 0; i < namingScreenDataPtr->template->maxChars; i++)
+    {
+        if (namingScreenDataPtr->textBuffer[i] != 0 && namingScreenDataPtr->textBuffer[i] != 0xFF)
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
 }
 
 static void DisplaySentToPCMessage(void)
