@@ -91,7 +91,7 @@ $(INTROGFXDIR)/copyright.4bpp: GFX_OPTS := -num_tiles 43
 
 TITLEGFXDIR := graphics/title_screen
 
-$(TITLEGFXDIR)/press_start.4bpp: GFX_OPTS := -num_tiles 41
+$(TITLEGFXDIR)/press_start.4bpp: GFX_OPTS := -num_tiles 56
 
 
 #### Interface ####
